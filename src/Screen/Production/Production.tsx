@@ -53,21 +53,22 @@ const Production = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-    
+
         if (!validateForm()) return; // Prevent form submission if validation fails
         setLoading(true);
-    
+
         try {
             const formDataToSend = new FormData();
             Object.entries(formData).forEach(([key, value]) => {
                 formDataToSend.append(key, value.toString()); // Ensure values are strings
             });
-    
+
             const response = await axios.post(URL, formDataToSend);
-    
+            console.log(response);
+
             toast.success("Ma'lumot muvaffaqiyatli qo‘shildi! 🎉");
-    
-    
+
+
             setFormData({
                 "Kimga": "",
                 "Eshik turi": "",
@@ -76,7 +77,7 @@ const Production = () => {
                 "Topshirilgan sana": "",
                 "Topshirilishi kerak sana": "",
             });
-    
+
         } catch (error) {
             console.error("Error submitting form:", error);
             toast.error("Xatolik! Ma'lumotni qo‘shib bo‘lmadi ❌");
@@ -84,7 +85,7 @@ const Production = () => {
             setLoading(false);
         }
     };
-    
+
 
     return (
         <div className="container">

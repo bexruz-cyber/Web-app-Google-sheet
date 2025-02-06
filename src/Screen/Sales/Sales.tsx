@@ -59,6 +59,8 @@ const Sales = () => {
       });
 
       const response = await axios.post(URL, formDataToSend);
+      console.log(response);
+      
       toast.success("Ma'lumot muvaffaqiyatli qo‘shildi! 🎉");
 
 
