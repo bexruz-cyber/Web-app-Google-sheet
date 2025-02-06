@@ -77,9 +77,9 @@ const Sales = () => {
     <div className="container">
       <div className="header">
         <GoBackBtn/>
-        <h1 className="title">Sotuv bo'limi</h1>
+        <h1 className="title" style={{marginBottom: 0}}>Sotuv bo'limi</h1>
       </div>
-      <form className="col" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         {([
           { label: "Qo’ng’iroqlar", name: "Qongiroqlar", type: "number" },
           { label: "Zamer belgilandi", name: "Zamer belgilandi", type: "number" },
@@ -99,7 +99,7 @@ const Sales = () => {
             />
             {errors[name] && (
               <div className="errorBox">
-                <p className="errorText">{errors[name]}</p>
+                <p className="error">{errors[name]}</p>
                 <img src={warning} alt="warning" />
               </div>
             )}

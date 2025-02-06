@@ -7,7 +7,7 @@ interface ButtonProps {
 
 const ButtonSubmit: React.FC<ButtonProps> = ({ title, type, fun, loading }) => {
   return (
-    <button type={type} className="submitBtn" onClick={fun}>
+    <button type={type} className="submit-btn" onClick={fun}>
       {
 
         loading ?

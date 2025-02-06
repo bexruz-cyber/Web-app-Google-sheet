@@ -91,9 +91,9 @@ const Production = () => {
         <div className="container">
             <div className="header">
                 <GoBackBtn />
-                <h1 className="title">Ishlab chiqarish</h1>
+                <h1 className="title" style={{marginBottom: 0}}>Ishlab chiqarish</h1>
             </div>
-            <form className="col" onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit}>
                 <div className="row">
                     <label htmlFor="Eshik turi">Eshik turi</label>
                     <select

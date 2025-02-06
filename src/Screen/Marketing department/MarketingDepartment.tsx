@@ -73,9 +73,9 @@ const MarketingDepartment = () => {
     <div className="container">
       <div className="header">
         <GoBackBtn />
-        <h1 className="title">Ishlab chiqarish</h1>
+        <h1 className="title" style={{marginBottom: 0}}>Marketing bo'limi</h1>
       </div>
-      <form className="col" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         {[
           { label: "Lidlar byujeti", name: "Lidlar Byujeti", type: "number" },
           { label: "Lidlar soni", name: "Lidlar soni", type: "number" },
@@ -92,7 +92,7 @@ const MarketingDepartment = () => {
             />
             {errors[name as keyof FormDataType] && (
               <div className="errorBox">
-                <p className="errorText">{errors[name as keyof FormDataType]}</p>
+                <p className="error">{errors[name as keyof FormDataType]}</p>
                 <img src={warning} alt="warning" />
               </div>
             )}

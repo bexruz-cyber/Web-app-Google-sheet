@@ -76,9 +76,9 @@ const SupplyDepartment = () => {
     <div className="container">
       <div className="header">
         <GoBackBtn />
-        <h1 className="title">Ishlab chiqarish</h1>
+        <h1 className="title" style={{marginBottom: 0}}>Taminot Bolimi</h1>
       </div>
-      <form className="col" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <div className="row">
           <label htmlFor="Eshik turi">Mijoz rozi</label>
           <select
@@ -94,7 +94,7 @@ const SupplyDepartment = () => {
           </select>
           {errors["Mijoz rozi"] &&
             <div className="errorBox">
-              <p className="errorText">{errors["Mijoz rozi"]}</p>
+              <p className="error">{errors["Mijoz rozi"]}</p>
               <img src={warning} alt="warning" />
             </div>
           }
