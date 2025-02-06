@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { URL } from "../../constants";
 import ButtonSubmit from "../../components/ButtonSubmit";
 import warning from "../../img/svg/warning.svg"
 import GoBackBtn from "../../components/GoBackBtn";
 import { toast } from "react-toastify";
+import { URL } from "../../constants";
 
 
 interface FormDataType {
