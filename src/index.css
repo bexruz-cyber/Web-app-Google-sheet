@@ -56,10 +56,13 @@ body {
 }
 .rotate{
   transform: rotate(180deg);
+  border: none;
+  background-color: transparent;
 }
 
 .arrow {
   transition: transform 0.3s ease;
+  border: none;
 }
 
 .select-btn:hover .arrow {
@@ -171,5 +174,9 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+.GoBackBtn{
+  border: none;
+  background-color: transparent;
 }
 

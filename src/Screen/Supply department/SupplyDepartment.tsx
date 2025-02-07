@@ -9,14 +9,16 @@ import { toast } from "react-toastify";
 interface FormDataType {
   "Yetkazib berildi": string,
   "O'rnatildi": string,
-  "Mijoz rozi": "Rozi" | "Norozi" | undefined
+  "Mijoz rozi": string,
+  Sana: string
 }
 
 const SupplyDepartment = () => {
   const [formData, setFormData] = useState<FormDataType>({
     "Yetkazib berildi": "",
     "O'rnatildi": "",
-    "Mijoz rozi": undefined,
+    "Mijoz rozi": "",
+    Sana: ""
   });
   const [loading, setLoading] = useState(false)
 
@@ -33,6 +35,7 @@ const SupplyDepartment = () => {
       "Yetkazib berildi": formData["Yetkazib berildi"] ? "" : "Yetkazib berildi bo‘sh bo‘lmasligi kerak!",
       "O'rnatildi": formData["O'rnatildi"] ? "" : "O'rnatildi bo‘sh bo‘lmasligi kerak!",
       "Mijoz rozi": formData["Mijoz rozi"] ? "" : "Mijoz bo‘sh bo‘lmasligi kerak!",
+      Sana: formData["Sana"] ? "" : "Sana bo‘sh bo‘lmasligi kerak!"
     };
 
     setErrors(newErrors);
@@ -60,7 +63,8 @@ const SupplyDepartment = () => {
       setFormData({
         "Yetkazib berildi": "",
         "O'rnatildi": "",
-        "Mijoz rozi": undefined,
+        "Mijoz rozi": "",
+        Sana: ""
       });
 
     } catch (error) {
@@ -79,29 +83,11 @@ const SupplyDepartment = () => {
         <h1 className="title" style={{marginBottom: 0}}>Taminot Bolimi</h1>
       </div>
       <form className="form" onSubmit={handleSubmit}>
-        <div className="row">
-          <label htmlFor="Eshik turi">Mijoz rozi</label>
-          <select
-            className={`inp ${errors["Mijoz rozi"] ? "invalid" : ""}`}
-            id="Mijoz rozi"
-            name="Mijoz rozi"
-            value={formData["Mijoz rozi"]}
-            onChange={handleChange}
-          >
-            <option>Tanlang</option>
-            <option value="Rozi">Rozi</option>
-            <option value="Norozi">Norozi</option>
-          </select>
-          {errors["Mijoz rozi"] &&
-            <div className="errorBox">
-              <p className="error">{errors["Mijoz rozi"]}</p>
-              <img src={warning} alt="warning" />
-            </div>
-          }
-        </div>
         {[
           { label: "Yetkazib berildi", name: "Yetkazib berildi", type: "number" },
           { label: "O'rnatildi", name: "O'rnatildi", type: "number" },
+          { label: "Mijoz rozi", name: "Mijoz rozi", type: "number" },
+          { label: "Sana", name: "Sana", type: "date" },
         ].map(({ label, name, type }) => (
           <div className="row" key={name}>
             <label htmlFor={name}>{label}</label>

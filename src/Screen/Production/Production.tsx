@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 interface FormDataType {
     Kimga: string;
     "Eshik turi": string;
-    Soni: string;
+    "Jami eshik": string;
     "Olingan sana": string;
     "Topshirilishi kerak sana": string;
     "Topshirilgan sana": string;
@@ -17,12 +17,12 @@ interface FormDataType {
 
 const Production = () => {
     const [formData, setFormData] = useState<FormDataType>({
-        "Eshik turi": "",
-        "Olingan sana": "",
-        "Topshirilgan sana": "",
-        "Topshirilishi kerak sana": "",
         Kimga: "",
-        Soni: "",
+        "Eshik turi": "",
+        "Jami eshik": "",
+        "Olingan sana": "",
+        "Topshirilishi kerak sana": "",
+        "Topshirilgan sana": "",
     });
     const [loading, setLoading] = useState(false)
 
@@ -37,7 +37,7 @@ const Production = () => {
         const newErrors: Partial<FormDataType> = {
             Kimga: formData["Kimga"] ? "" : "Kimga bo‘sh bo‘lmasligi kerak!",
             "Eshik turi": formData["Eshik turi"] ? "" : "Eshik turi bo‘sh bo‘lmasligi kerak!",
-            Soni: formData["Soni"] !== "" ? "" : "Soni bo‘sh bo‘lmasligi kerak!",
+            "Jami eshik": formData["Jami eshik"] !== "" ? "" : "Soni bo‘sh bo‘lmasligi kerak!",
             "Olingan sana": formData["Olingan sana"] ? "" : "Olingan sana bo‘sh bo‘lmasligi kerak!",
             "Topshirilishi kerak sana": formData["Topshirilishi kerak sana"]
                 ? ""
@@ -58,6 +58,8 @@ const Production = () => {
         setLoading(true);
 
         try {
+            console.log(formData);
+            
             const formDataToSend = new FormData();
             Object.entries(formData).forEach(([key, value]) => {
                 formDataToSend.append(key, value.toString()); // Ensure values are strings
@@ -70,9 +72,9 @@ const Production = () => {
 
 
             setFormData({
-                "Kimga": "",
+                Kimga: "",
                 "Eshik turi": "",
-                Soni: "",
+                "Jami eshik": "",
                 "Olingan sana": "",
                 "Topshirilgan sana": "",
                 "Topshirilishi kerak sana": "",
@@ -104,8 +106,9 @@ const Production = () => {
                         onChange={handleChange}
                     >
                         <option>Tanlang</option>
-                        <option value="Qiyin">Qiyin</option>
-                        <option value="Oson">Oson</option>
+                        <option value="qiyin">Qiyin</option>
+                        <option value="oddiy">Oddiy</option>
+                        <option value="qaytgan">Qaytgan</option>
                     </select>
                     {errors["Eshik turi"] &&
                         <div className="errorBox">
@@ -116,7 +119,7 @@ const Production = () => {
                 </div>
                 {[
                     { label: "Kimga", name: "Kimga", type: "text" },
-                    { label: "Soni", name: "Soni", type: "number" },
+                    { label: "Jami eshik", name: "Jami eshik", type: "number" },
                     { label: "Olingan sana", name: "Olingan sana", type: "date" },
                     { label: "Topshirilishi kerak sana", name: "Topshirilishi kerak sana", type: "date" },
                     { label: "Topshirilgan sana", name: "Topshirilgan sana", type: "date" },

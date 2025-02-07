@@ -9,12 +9,14 @@ import { toast } from "react-toastify";
 interface FormDataType {
   "Lidlar Byujeti": string,
   "Lidlar soni": string,
+  Sana: string
 }
 
 const MarketingDepartment = () => {
   const [formData, setFormData] = useState<FormDataType>({
     "Lidlar Byujeti": "",
     "Lidlar soni": "",
+    Sana: ""
   });
   const [loading, setLoading] = useState(false)
 
@@ -29,7 +31,8 @@ const MarketingDepartment = () => {
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof FormDataType, string>> = {
       "Lidlar Byujeti": formData["Lidlar Byujeti"] ? "" : "Yetkazib berildi bo‘sh bo‘lmasligi kerak!",
-      "Lidlar soni": formData["Lidlar soni"]? "" : "Lidlar soni bo‘sh bo‘lmasligi kerak!",
+      "Lidlar soni": formData["Lidlar soni"] ? "" : "Lidlar soni bo‘sh bo‘lmasligi kerak!",
+      Sana: formData["Sana"]? "" : "Sana bo‘sh bo‘lmasligi kerak!",
     };
 
     setErrors(newErrors);
@@ -50,7 +53,7 @@ const MarketingDepartment = () => {
 
       const response = await axios.post(URL, formDataToSend);
       console.log(response);
-      
+
 
       toast.success("Ma'lumot muvaffaqiyatli qo‘shildi! 🎉");
 
@@ -58,6 +61,7 @@ const MarketingDepartment = () => {
       setFormData({
         "Lidlar Byujeti": "",
         "Lidlar soni": "",
+        Sana: ""
       });
 
     } catch (error) {
@@ -73,12 +77,13 @@ const MarketingDepartment = () => {
     <div className="container">
       <div className="header">
         <GoBackBtn />
-        <h1 className="title" style={{marginBottom: 0}}>Marketing bo'limi</h1>
+        <h1 className="title" style={{ marginBottom: 0 }}>Marketing bo'limi</h1>
       </div>
       <form className="form" onSubmit={handleSubmit}>
         {[
           { label: "Lidlar byujeti", name: "Lidlar Byujeti", type: "number" },
           { label: "Lidlar soni", name: "Lidlar soni", type: "number" },
+          { label: "Sana", name: "Sana", type: "date" },
         ].map(({ label, name, type }) => (
           <div className="row" key={name}>
             <label htmlFor={name}>{label}</label>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import GoBackBtn from "../../components/GoBackBtn";
-
+import arrow from "../../img/svg/arrow.svg"
 
 interface ButtonType {
     title: string
@@ -45,9 +45,9 @@ const Start = () => {
                 {ButtonsData.map((btn) => (
                     <Link key={btn.id} to={btn.navigate} className="select-btn">
                         {btn.title}
-                        <span className="arrow rotate">
-                            <GoBackBtn />  
-                        </span>
+                        <button className="arrow rotate">
+                            <img src={arrow} alt="arrow" />
+                        </button>
                     </Link>
                 ))}
             </div>
