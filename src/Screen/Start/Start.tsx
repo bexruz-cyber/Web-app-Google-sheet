@@ -32,7 +32,7 @@ const Start = () => {
         {
             title: "Google sheets",
             navigate:
-                "https://docs.google.com/spreadsheets/d/1wBlVsjonbyX12LQ-7lTwt5OWDx97m2ZGK70LiFjPAEQ/edit?gid=207084512#gid=207084512",
+                "https://docs.google.com/spreadsheets/d/1Lgc_GNv0aQI-hwxPt25l36XPZArOd4bHjbdcSClm34I/edit?gid=2039146843#gid=2039146843",
             id: 5,
         },
     ]
