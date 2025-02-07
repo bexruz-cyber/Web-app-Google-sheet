@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import GoBackBtn from "../../components/GoBackBtn";
 import arrow from "../../img/svg/arrow.svg"
 
 interface ButtonType {
