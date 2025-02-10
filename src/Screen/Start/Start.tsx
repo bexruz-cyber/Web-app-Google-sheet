@@ -30,6 +30,11 @@ const Start = () => {
             id: 4,
         },
         {
+            title: "Kunlik hisobot",
+            navigate: "dashboard",
+            id: 6,
+        },
+        {
             title: "Google sheets",
             navigate:
                 "https://docs.google.com/spreadsheets/d/1Lgc_GNv0aQI-hwxPt25l36XPZArOd4bHjbdcSClm34I/edit?gid=2039146843#gid=2039146843",

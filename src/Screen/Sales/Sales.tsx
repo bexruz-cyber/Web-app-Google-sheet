@@ -75,7 +75,7 @@ const Sales = () => {
 
   return (
     <div className="container">
-      <div className="header">
+     <div className="header">
         <GoBackBtn />
         <h1 className="title" style={{ marginBottom: 0 }}>Sotuv bo'limi</h1>
       </div>
