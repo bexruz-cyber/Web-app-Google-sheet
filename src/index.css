@@ -150,6 +150,7 @@ html{
 }
 
 .submit-btn {
+  height: 44px;
   width: 100%;
   padding: 12px;
   background-color: #3b82f6;

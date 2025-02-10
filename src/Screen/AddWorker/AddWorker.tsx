@@ -2,6 +2,8 @@ import axios from "axios";
 import ButtonSubmit from "../../components/ButtonSubmit";
 import { APIURL } from "../../constants";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const tg_users: Record<string, string> = {
     boss: "2103708334",
@@ -14,9 +16,10 @@ const tg_users: Record<string, string> = {
 const AddWorker = () => {
     const [loading, setLoading] = useState(false);
     const [department, setDepartment] = useState("boss");
+    const navigate = useNavigate()
 
     const AddWorkerFun = async (e: React.FormEvent) => {
-        e.preventDefault(); 
+        e.preventDefault();
         setLoading(true);
 
         const telegramId = tg_users[department];
@@ -26,9 +29,12 @@ const AddWorker = () => {
                 name: department,
                 tg_id: telegramId,
             });
-            console.log("Worker added:", response.data);
-        } catch (error) {
+            navigate("/")
+            localStorage.setItem("token", "auth")
+            console.log("Worker added:", response);
+        } catch (error: any) {
             console.error("Error adding worker:", error);
+            toast.error(`Xatolik: ${error.response.data.detail}`);
         } finally {
             setLoading(false);
         }
@@ -51,8 +57,8 @@ const AddWorker = () => {
                             <option value="boss">Boshliq</option>
                             <option value="sotuv_bolimi">Sotuv bo'limi</option>
                             <option value="ishlab_chiqarish">Ishlab chiqarish</option>
-                            <option value="taminot_bolimi">Ta'minot bo‘limi</option>
-                            <option value="marketing_bolimi">Marketing bo‘limi</option>
+                            <option value="taminot_bolimi">Ta'minot bo'limi</option>
+                            <option value="marketing_bolimi">Marketing bo‘'limi</option>
                         </select>
                     </div>
 

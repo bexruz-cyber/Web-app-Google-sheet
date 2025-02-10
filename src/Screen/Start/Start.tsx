@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom"
 import arrow from "../../img/svg/arrow.svg"
+import axios from "axios"
+import { APIURL } from "../../constants"
+import { useEffect } from "react"
 
 interface ButtonType {
     title: string
@@ -41,6 +44,20 @@ const Start = () => {
             id: 5,
         },
     ]
+
+    const GetWorkers = async () => {
+        try {
+            const { data } = await axios.get(`${APIURL}/workers/`)
+            console.log("workers", data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        GetWorkers()
+    }, [])
+
 
     return (
         <div className="container">
