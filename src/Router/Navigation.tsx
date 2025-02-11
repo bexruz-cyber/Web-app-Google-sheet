@@ -4,10 +4,12 @@ import Production from "../Screen/Production/Production"
 import SupplyDepartment from "../Screen/Supply department/SupplyDepartment"
 import MarketingDepartment from "../Screen/Marketing department/MarketingDepartment"
 import Dashboard from "../Screen/Dashhboard/Dashboard"
+import Home from "../Screen/Home/Home"
 
 const Navigation = () => {
     return (
         <Routes>
+            <Route path="/" element={<Home />} />
             <Route path="/sales" element={<Sales />} />
             <Route path="/production" element={<Production />} />
             <Route path="/suplyDepartment" element={<SupplyDepartment />} />
