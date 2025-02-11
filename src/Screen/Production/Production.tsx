@@ -1,5 +1,4 @@
 import { useState } from "react";
-import GoBackBtn from "../../components/GoBackBtn";
 import axios from "axios";
 import { URL } from "../../constants";
 import warning from "../../img/svg/warning.svg";
@@ -92,7 +91,6 @@ const Production = () => {
     return (
         <div className="container">
             <div className="header">
-                <GoBackBtn />
                 <h1 className="title" style={{marginBottom: 0}}>Ishlab chiqarish</h1>
             </div>
             <form className="form" onSubmit={handleSubmit}>

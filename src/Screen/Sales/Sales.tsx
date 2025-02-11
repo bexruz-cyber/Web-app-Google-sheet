@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import ButtonSubmit from "../../components/ButtonSubmit";
 import warning from "../../img/svg/warning.svg"
-import GoBackBtn from "../../components/GoBackBtn";
 import { toast } from "react-toastify";
 import { URL } from "../../constants";
 
@@ -76,7 +75,6 @@ const Sales = () => {
   return (
     <div className="container">
      <div className="header">
-        <GoBackBtn />
         <h1 className="title" style={{ marginBottom: 0 }}>Sotuv bo'limi</h1>
       </div>
       <form className="form" onSubmit={handleSubmit}>

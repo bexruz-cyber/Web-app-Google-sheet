@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import GoBackBtn from "../../components/GoBackBtn";
 import axios from "axios";
 import Table from "../../components/Table";
 
@@ -65,7 +64,6 @@ const Dashboard = () => {
   return (
     <div className="container">
       <div className="header">
-        <GoBackBtn />
         <h1 className="title" style={{ marginBottom: 0 }}>Kunlik hisobot</h1>
       </div>
       <div className="box ">
