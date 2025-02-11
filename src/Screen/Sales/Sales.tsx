@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ButtonSubmit from "../../components/ButtonSubmit";
 import warning from "../../img/svg/warning.svg"
 import { toast } from "react-toastify";
-import { URL } from "../../constants";
+import { APIURL, URL } from "../../constants";
+import useTaskAdd from "../../Hooks/useTaskAdd ";
 
 
 interface FormDataType {
@@ -15,6 +16,8 @@ interface FormDataType {
 }
 
 const Sales = () => {
+  const TaskAddFun = useTaskAdd();
+  const [salesDepId, setSalesDepId] = useState<number | null>(null);
   const [formData, setFormData] = useState<FormDataType>({
     Qongiroqlar: "",
     Zamer: "",
@@ -22,10 +25,27 @@ const Sales = () => {
     Sotuv: "",
     "Sana B": "",
   });
-  const [loading, setLoading] = useState(false)
-
-
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Partial<FormDataType>>({});
+
+  useEffect(() => {
+    GetWorkers();
+  }, []);
+
+  const GetWorkers = async () => {
+    try {
+      const { data } = await axios.get(`${APIURL}/workers/`);
+      console.log("workers", data);
+
+      const salesDepartment = data.data.find((worker: any) => worker.name === "sotuv_bolimi");
+
+      if (salesDepartment) {
+        setSalesDepId(salesDepartment.id);
+      }
+    } catch (error) {
+      console.error("Error fetching workers:", error);
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -48,33 +68,37 @@ const Sales = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!salesDepId) {
+      toast.error("Sizning ID yingiz topilmadi");
+      return;
+    }
 
     if (!validateForm()) return; // Agar validatsiya xato bo‘lsa, form yuborilmaydi
-    setLoading(true)
+
+    setLoading(true);
     try {
+      await TaskAddFun(salesDepId);
       const formDataToSend = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
         formDataToSend.append(key, value);
       });
 
       const response = await axios.post(URL, formDataToSend);
-      console.log(response);
+      console.log("Form response:", response);
 
+      setFormData({ Qongiroqlar: "", Zamer: "", Sotuv: "", "Sana B": "", "Sotuv Miqdori": "" });
       toast.success("Ma'lumot muvaffaqiyatli qo‘shildi! 🎉");
-
-
-      setFormData({ Qongiroqlar: "", Zamer: "", Sotuv: "", "Sana B": "" , "Sotuv Miqdori": ""});
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("Xatolik! Ma'lumotni qo‘shib bo‘lmadi ❌");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
   return (
     <div className="container">
-     <div className="header">
+      <div className="header">
         <h1 className="title" style={{ marginBottom: 0 }}>Sotuv bo'limi</h1>
       </div>
       <form className="form" onSubmit={handleSubmit}>

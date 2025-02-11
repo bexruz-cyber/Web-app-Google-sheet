@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { URL } from "../../constants";
+import { APIURL, URL } from "../../constants";
 import warning from "../../img/svg/warning.svg";
 import ButtonSubmit from "../../components/ButtonSubmit";
 import { toast } from "react-toastify";
+import useTaskAdd from "../../Hooks/useTaskAdd ";
 
 interface FormDataType {
   "Yetkazib berildi": string,
@@ -13,6 +14,9 @@ interface FormDataType {
 }
 
 const SupplyDepartment = () => {
+  const TaskAddFun = useTaskAdd();
+  const [salesDepId, setSalesDepId] = useState<number | null>(null);
+
   const [formData, setFormData] = useState<FormDataType>({
     "Yetkazib berildi": "",
     "O'rnatildi": "",
@@ -22,6 +26,26 @@ const SupplyDepartment = () => {
   const [loading, setLoading] = useState(false)
 
   const [errors, setErrors] = useState<Partial<Record<keyof FormDataType, string>>>({});
+
+  useEffect(() => {
+    GetWorkers();
+  }, []);
+
+  const GetWorkers = async () => {
+    try {
+      const { data } = await axios.get(`${APIURL}/workers/`);
+      console.log("workers", data);
+
+      const salesDepartment = data.data.find((worker: any) => worker.name === "taminot_bolimi");
+
+      if (salesDepartment) {
+        setSalesDepId(salesDepartment.id);
+      }
+    } catch (error) {
+      console.error("Error fetching workers:", error);
+    }
+  };
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -44,10 +68,19 @@ const SupplyDepartment = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!salesDepId) {
+      toast.error("Sizning ID yingiz topilmadi");
+      return;
+    }
+
+
     if (!validateForm()) return; // Prevent form submission if validation fails
     setLoading(true);
 
     try {
+
+      await TaskAddFun(salesDepId); // Avval Task qo‘shish funksiyasini chaqiramiz
+
       const formDataToSend = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
         formDataToSend.append(key, value.toString()); // Ensure values are strings
@@ -78,7 +111,7 @@ const SupplyDepartment = () => {
   return (
     <div className="container">
       <div className="header">
-        <h1 className="title" style={{marginBottom: 0}}>Taminot Bolimi</h1>
+        <h1 className="title" style={{ marginBottom: 0 }}>Taminot Bolimi</h1>
       </div>
       <form className="form" onSubmit={handleSubmit}>
         {[
