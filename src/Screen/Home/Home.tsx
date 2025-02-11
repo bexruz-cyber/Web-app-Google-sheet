@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Home: React.FC = () => {
+const Home = () => {
   const [userId, setUserId] = useState<number | null>(null);
 
   useEffect(() => {
