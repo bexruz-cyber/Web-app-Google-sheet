@@ -1,9 +1,7 @@
 const Table = ({ data, classNameProp }: { data: string[][], classNameProp: string }) => {
     if (data.length === 0) return null;
 
-    // Sarlavhalarni olish
     const headers = data[0];
-    // Ma'lumotlarni olish
     const rows = data.slice(1);
 
     return (
@@ -11,11 +9,16 @@ const Table = ({ data, classNameProp }: { data: string[][], classNameProp: strin
             {headers.map((header, columnIndex) => (
                 <div key={columnIndex} className="tableColumn">
                     <div className="tableCol">{header}</div>
-                    {rows.map((row, rowIndex) => (
-                        <div key={rowIndex} className="tableCol">
-                            {row[columnIndex] ?? "-"}
-                        </div>
-                    ))}
+                    {rows.map((row, rowIndex) => {
+                        const value = row[columnIndex];
+                        const formattedValue = !isNaN(Number(value)) ? Math.round(Number(value)) : value; 
+
+                        return (
+                            <div key={rowIndex} className="tableCol">
+                                {formattedValue ?? "-"}
+                            </div>
+                        );
+                    })}
                 </div>
             ))}
         </div>
