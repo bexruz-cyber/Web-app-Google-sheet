@@ -8,7 +8,6 @@
 body {
   background: linear-gradient(135deg, #f3e7ff 0%, #e3f0ff 50%, #e7fff9 100%);
   min-height: 100vh;
-  padding: 20px;
   overflow-x: hidden;
 }
 html{
@@ -253,9 +252,25 @@ html{
 
 
 @media(max-width: 500px){
-  .tableContent{
+  .tableContent:nth-child(3){
     grid-template-columns: 1fr;
   }
+  .tableCol{
+    font-size: 14px;
+  }
+    .box{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .col5{
+    
+  }
+}
+@media(max-width: 350px){
+  /* .tableContent{
+    grid-template-columns: 1fr;
+  } */
+
 }
 
 
