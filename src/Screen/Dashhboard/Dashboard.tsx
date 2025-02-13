@@ -29,7 +29,7 @@ const sections = [
     id: "ishlab",
     title: "Ishlab chiqarish",
     className: "col5",
-    headers: ["Oddiy eshik", "Qiyin eshik", "Jami eshik", "Vaqtida topshirildi", "Vaqtida topshirildi foizi"],
+    headers: ["Oddiy eshik", "Qiyin eshik", "Jami eshik", "Vaqtida topshirildi", "Vaqtida topshirildi %"],
     sheetIds: {
       day: "18epTxdZBwCnBTwxn6DYOCJ0fgCAbNQQYR7Qad9IMIx0",
       week: "17eJlNnmrxwNya3nAoPI21YCUiLFcmb3zRoc04WfjbFY",
