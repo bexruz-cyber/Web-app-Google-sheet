@@ -12,7 +12,7 @@ interface FormDataType {
   Zamer: string;
   Sotuv: string;
   "Sotuv Miqdori": string;
-  "Sana B": string;
+  Sana: string;
 }
 
 const Sales = () => {
@@ -23,7 +23,7 @@ const Sales = () => {
     Zamer: "",
     "Sotuv Miqdori": "",
     Sotuv: "",
-    "Sana B": "",
+    Sana: "",
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Partial<FormDataType>>({});
@@ -59,7 +59,7 @@ const Sales = () => {
       Zamer: formData["Zamer"] ? "" : "Zamer bo‘sh bo‘lmasligi kerak!",
       "Sotuv Miqdori": formData["Sotuv Miqdori"] ? "" : "Sotuv Miqdori bo‘sh bo‘lmasligi kerak!",
       Sotuv: formData.Sotuv ? "" : "Sotuv bo‘sh bo‘lmasligi kerak!",
-      "Sana B": formData["Sana B"] ? "" : "Sana bo‘sh bo‘lmasligi kerak!",
+      Sana: formData["Sana"] ? "" : "Sana bo‘sh bo‘lmasligi kerak!",
     };
 
     setErrors(newErrors);
@@ -86,7 +86,7 @@ const Sales = () => {
       const response = await axios.post(URL, formDataToSend);
       console.log("Form response:", response);
 
-      setFormData({ Qongiroqlar: "", Zamer: "", Sotuv: "", "Sana B": "", "Sotuv Miqdori": "" });
+      setFormData({ Qongiroqlar: "", Zamer: "", Sotuv: "", "Sana": "", "Sotuv Miqdori": "" });
       toast.success("Ma'lumot muvaffaqiyatli qo‘shildi! 🎉");
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -107,7 +107,7 @@ const Sales = () => {
           { label: "Zamer belgilandi", name: "Zamer", type: "number" },
           { label: "Sotuv", name: "Sotuv", type: "number" },
           { label: "Sotuv miqdori", name: "Sotuv Miqdori", type: "number" },
-          { label: "Sana", name: "Sana B", type: "date" },
+          { label: "Sana", name: "Sana", type: "date" },
         ] as const).map(({ label, name, type }) => (
           <div className="row" key={name}>
             <label htmlFor={name}>{label}</label>
