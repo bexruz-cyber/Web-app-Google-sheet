@@ -9,6 +9,8 @@ import useTaskAdd from "../../Hooks/useTaskAdd ";
 interface FormDataType {
   "Lidlar Byujeti": string,
   "Lidlar soni": string,
+  Kontent: string;
+  Story: string;
   Sana: string
 }
 
@@ -18,6 +20,8 @@ const MarketingDepartment = () => {
   const [formData, setFormData] = useState<FormDataType>({
     "Lidlar Byujeti": "",
     "Lidlar soni": "",
+    Kontent: "",
+    Story: "",
     Sana: ""
   });
   const [loading, setLoading] = useState(false)
@@ -54,6 +58,8 @@ const MarketingDepartment = () => {
     const newErrors: Partial<Record<keyof FormDataType, string>> = {
       "Lidlar Byujeti": formData["Lidlar Byujeti"] ? "" : "Yetkazib berildi bo‘sh bo‘lmasligi kerak!",
       "Lidlar soni": formData["Lidlar soni"] ? "" : "Lidlar soni bo‘sh bo‘lmasligi kerak!",
+      Kontent: formData["Kontent"] ? "" : "Kontent bo'sh bo'lmasligi kerak",
+      Story: formData["Story"]? "" : "Story bo'sh bo'lmasligi kerak",
       Sana: formData["Sana"] ? "" : "Sana bo‘sh bo‘lmasligi kerak!",
     };
 
@@ -66,7 +72,7 @@ const MarketingDepartment = () => {
     if (!salesDepId) {
       toast.error("Sizning ID yingiz topilmadi");
       return;
-  }
+    }
     if (!validateForm()) return; // Prevent form submission if validation fails
     setLoading(true);
 
@@ -88,6 +94,8 @@ const MarketingDepartment = () => {
       setFormData({
         "Lidlar Byujeti": "",
         "Lidlar soni": "",
+        Kontent: "",
+        Story: "",
         Sana: ""
       });
 
@@ -109,6 +117,8 @@ const MarketingDepartment = () => {
         {[
           { label: "Lidlar byujeti", name: "Lidlar Byujeti", type: "number" },
           { label: "Lidlar soni", name: "Lidlar soni", type: "number" },
+          { label: "Kontent", name: "Kontent", type: "number" },
+          { label: "Story", name: "Story", type: "number" },
           { label: "Sana", name: "Sana", type: "date" },
         ].map(({ label, name, type }) => (
           <div className="row" key={name}>
