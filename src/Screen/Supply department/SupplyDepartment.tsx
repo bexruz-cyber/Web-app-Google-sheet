@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import useTaskAdd from "../../Hooks/useTaskAdd ";
 
 interface FormDataType {
+  Kimga: string;
   "Yetkazib berildi": string,
   "O'rnatildi": string,
   "Mijoz rozi": string,
@@ -18,10 +19,11 @@ const SupplyDepartment = () => {
   const [salesDepId, setSalesDepId] = useState<number | null>(null);
 
   const [formData, setFormData] = useState<FormDataType>({
+    Kimga: "",
     "Yetkazib berildi": "",
     "O'rnatildi": "",
     "Mijoz rozi": "",
-    Sana: ""
+    Sana: "",
   });
   const [loading, setLoading] = useState(false)
 
@@ -93,6 +95,7 @@ const SupplyDepartment = () => {
 
 
       setFormData({
+        Kimga: "",
         "Yetkazib berildi": "",
         "O'rnatildi": "",
         "Mijoz rozi": "",
@@ -115,6 +118,7 @@ const SupplyDepartment = () => {
       </div>
       <form className="form" onSubmit={handleSubmit}>
         {[
+          { label: "Kimga", name: "Kimga", type: "text" },
           { label: "Yetkazib berildi", name: "Yetkazib berildi", type: "number" },
           { label: "O'rnatildi", name: "O'rnatildi", type: "number" },
           { label: "Mijoz rozi", name: "Mijoz rozi", type: "number" },
