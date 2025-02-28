@@ -9,6 +9,7 @@ import useTaskAdd from "../../Hooks/useTaskAdd ";
 
 interface FormDataType {
   Qongiroqlar: string;
+  "instagram yead otdel": string;
   Zamer: string;
   Sotuv: string;
   "Sotuv Miqdori": string;
@@ -20,6 +21,7 @@ const Sales = () => {
   const [salesDepId, setSalesDepId] = useState<number | null>(null);
   const [formData, setFormData] = useState<FormDataType>({
     Qongiroqlar: "",
+    "instagram yead otdel": "",
     Zamer: "",
     "Sotuv Miqdori": "",
     Sotuv: "",
@@ -56,6 +58,7 @@ const Sales = () => {
   const validateForm = (): boolean => {
     const newErrors: Partial<FormDataType> = {
       Qongiroqlar: formData.Qongiroqlar ? "" : "Qo’ng’iroqlar bo‘sh bo‘lmasligi kerak!",
+      "instagram yead otdel": formData["instagram yead otdel"] ? "" : "Instagram yead otdel bo‘sh bo‘lmasligi kerak!",
       Zamer: formData["Zamer"] ? "" : "Zamer bo‘sh bo‘lmasligi kerak!",
       "Sotuv Miqdori": formData["Sotuv Miqdori"] ? "" : "Sotuv Miqdori bo‘sh bo‘lmasligi kerak!",
       Sotuv: formData.Sotuv ? "" : "Sotuv bo‘sh bo‘lmasligi kerak!",
@@ -86,7 +89,7 @@ const Sales = () => {
       const response = await axios.post(URL, formDataToSend);
       console.log("Form response:", response);
 
-      setFormData({ Qongiroqlar: "", Zamer: "", Sotuv: "", "Sana": "", "Sotuv Miqdori": "" });
+      setFormData({ Qongiroqlar: "", Zamer: "", Sotuv: "", "Sana": "", "Sotuv Miqdori": "", "instagram yead otdel": "" });
       toast.success("Ma'lumot muvaffaqiyatli qo‘shildi! 🎉");
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -104,6 +107,7 @@ const Sales = () => {
       <form className="form" onSubmit={handleSubmit}>
         {([
           { label: "Qo’ng’iroqlar", name: "Qongiroqlar", type: "number" },
+          { label: "Instagram yead otdel", name: "instagram yead otdel", type: "number" },
           { label: "Zamer belgilandi", name: "Zamer", type: "number" },
           { label: "Sotuv", name: "Sotuv", type: "number" },
           { label: "Sotuv miqdori", name: "Sotuv Miqdori", type: "number" },
