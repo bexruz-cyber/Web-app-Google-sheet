@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { URL } from "../../constants";
 
 interface FormDataType {
-  "Do’konga kirgan odamlar soni": string;
+  "Kirilgan yangi do’konlar soni": string;
   "Sotuvlar soni": string;
   "Sotuv miqdori": string;
   "Qarz": string;
@@ -15,10 +15,10 @@ interface FormDataType {
   "Sana": string;
 }
 
-const Sales = () => {
+const Agent = () => {
   // const [salesDepId, setSalesDepId] = useState<number | null>(null);
   const [formData, setFormData] = useState<FormDataType>({
-    "Do’konga kirgan odamlar soni": "",
+    "Kirilgan yangi do’konlar soni": "",
     "Sotuvlar soni": "",
     "Sotuv miqdori": "",
     "Qarz": "",
@@ -67,7 +67,7 @@ const Sales = () => {
       console.log("Form response:", response);
 
       setFormData({
-        "Do’konga kirgan odamlar soni": "",
+        "Kirilgan yangi do’konlar soni": "",
         "Sotuvlar soni": "",
         "Sotuv miqdori": "",
         "Qarz": "",
@@ -87,11 +87,11 @@ const Sales = () => {
   return (
     <div className="container">
       <div className="header">
-        <h1 className="title" style={{ marginBottom: 0 }}>Sotuv bo'limi</h1>
+        <h1 className="title" style={{ marginBottom: 0 }}>Agent bo'limi</h1>
       </div>
       <form className="form" onSubmit={handleSubmit}>
         {([
-          { label: "Do’konga kirgan odamlar soni", name: "Do’konga kirgan odamlar soni", type: "number" },
+          { label: "Kirilgan yangi do’konlar soni", name: "Kirilgan yangi do’konlar soni", type: "number" },
           { label: "Sotuvlar soni", name: "Sotuvlar soni", type: "number" },
           { label: "Sotuv miqdori", name: "Sotuv miqdori", type: "number" },
           { label: "Qarz", name: "Qarz", type: "number" },
@@ -123,4 +123,4 @@ const Sales = () => {
   );
 };
 
-export default Sales;
+export default Agent;
