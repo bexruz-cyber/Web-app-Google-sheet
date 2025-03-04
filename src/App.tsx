@@ -20,14 +20,14 @@ const App: React.FC = () => {
   // }, []);
 
   return (
-    <div>
+    <>
       <Navigation />
       {/* <div style={{ textAlign: "center", marginTop: "20px" }}>
         <h3>Telegram ID:</h3>
         <p>{telegramId ? telegramId : "Foydalanuvchi topilmadi"}</p>
       </div> */}
       <ToastContainer position="top-right" autoClose={3000} />
-    </div>
+    </>
   );
 };
 

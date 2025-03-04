@@ -1,63 +1,86 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ButtonSubmit from "../../components/ButtonSubmit";
-import warning from "../../img/svg/warning.svg";
+import warning from "../../img/svg/warning.svg"
 import { toast } from "react-toastify";
-import { URL } from "../../constants";
+import { APIURL, URL } from "../../constants";
+import useTaskAdd from "../../Hooks/useTaskAdd ";
+
 
 interface FormDataType {
-  "Do’konga kirgan odamlar soni": string;
-  "Sotuvlar soni": string;
-  "Sotuv miqdori": string;
-  "Qarz": string;
-  "Savdo": string;
-  "Tushum": string;
-  "Sana": string;
+  Qongiroqlar: string;
+  "instagram yead otdel": string;
+  Zamer: string;
+  Sotuv: string;
+  "Sotuv Miqdori": string;
+  Sana: string;
 }
 
 const Sales = () => {
-  // const [salesDepId, setSalesDepId] = useState<number | null>(null);
+  const TaskAddFun = useTaskAdd();
+  const [salesDepId, setSalesDepId] = useState<number | null>(null);
   const [formData, setFormData] = useState<FormDataType>({
-    "Do’konga kirgan odamlar soni": "",
-    "Sotuvlar soni": "",
-    "Sotuv miqdori": "",
-    "Qarz": "",
-    "Savdo": "",
-    "Tushum": "",
-    "Sana": "",
+    Qongiroqlar: "",
+    "instagram yead otdel": "",
+    Zamer: "",
+    "Sotuv Miqdori": "",
+    Sotuv: "",
+    Sana: "",
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Partial<FormDataType>>({});
 
+  useEffect(() => {
+    GetWorkers();
+  }, []);
+
+  const GetWorkers = async () => {
+    try {
+      const { data } = await axios.get(`${APIURL}/workers/`);
+      console.log("workers", data);
+
+      const salesDepartment = data.data.find((worker: any) => worker.name === "sotuv_bolimi");
+
+      if (salesDepartment) {
+        setSalesDepId(salesDepartment.id);
+      }
+    } catch (error) {
+      console.error("Error fetching workers:", error);
+    }
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" }));
+    setErrors((prev) => ({ ...prev, [name]: "" })); // Xatolikni tozalash
   };
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<FormDataType> = {};
-    Object.keys(formData).forEach((key) => {
-      if (!formData[key as keyof FormDataType]) {
-        newErrors[key as keyof FormDataType] = `${key} bo‘sh bo‘lmasligi kerak!`;
-      }
-    });
+    const newErrors: Partial<FormDataType> = {
+      Qongiroqlar: formData.Qongiroqlar ? "" : "Qo’ng’iroqlar bo‘sh bo‘lmasligi kerak!",
+      "instagram yead otdel": formData["instagram yead otdel"] ? "" : "Instagram yead otdel bo‘sh bo‘lmasligi kerak!",
+      Zamer: formData["Zamer"] ? "" : "Zamer bo‘sh bo‘lmasligi kerak!",
+      "Sotuv Miqdori": formData["Sotuv Miqdori"] ? "" : "Sotuv Miqdori bo‘sh bo‘lmasligi kerak!",
+      Sotuv: formData.Sotuv ? "" : "Sotuv bo‘sh bo‘lmasligi kerak!",
+      Sana: formData["Sana"] ? "" : "Sana bo‘sh bo‘lmasligi kerak!",
+    };
 
     setErrors(newErrors);
-    return Object.values(newErrors).every((err) => err === "");
+    return Object.values(newErrors).every((err) => err === ""); // Agar hamma maydon to‘g‘ri bo‘lsa, `true` qaytaradi
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // if (!salesDepId) {
-    //   toast.error("Sizning ID yingiz topilmadi");
-    //   return;
-    // }
+    if (!salesDepId) {
+      toast.error("Sizning ID yingiz topilmadi");
+      return;
+    }
 
-    if (!validateForm()) return;
+    if (!validateForm()) return; // Agar validatsiya xato bo‘lsa, form yuborilmaydi
 
     setLoading(true);
     try {
+      await TaskAddFun(salesDepId);
       const formDataToSend = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
         formDataToSend.append(key, value);
@@ -66,15 +89,7 @@ const Sales = () => {
       const response = await axios.post(URL, formDataToSend);
       console.log("Form response:", response);
 
-      setFormData({
-        "Do’konga kirgan odamlar soni": "",
-        "Sotuvlar soni": "",
-        "Sotuv miqdori": "",
-        "Qarz": "",
-        "Savdo": "",
-        "Tushum": "",
-        "Sana": "",
-      });
+      setFormData({ Qongiroqlar: "", Zamer: "", Sotuv: "", "Sana": "", "Sotuv Miqdori": "", "instagram yead otdel": "" });
       toast.success("Ma'lumot muvaffaqiyatli qo‘shildi! 🎉");
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -91,12 +106,11 @@ const Sales = () => {
       </div>
       <form className="form" onSubmit={handleSubmit}>
         {([
-          { label: "Do’konga kirgan odamlar soni", name: "Do’konga kirgan odamlar soni", type: "number" },
-          { label: "Sotuvlar soni", name: "Sotuvlar soni", type: "number" },
-          { label: "Sotuv miqdori", name: "Sotuv miqdori", type: "number" },
-          { label: "Qarz", name: "Qarz", type: "number" },
-          { label: "Savdo", name: "Savdo", type: "number" },
-          { label: "Tushum", name: "Tushum", type: "number" },
+          { label: "Qo’ng’iroqlar", name: "Qongiroqlar", type: "number" },
+          { label: "Instagram yead otdel", name: "instagram yead otdel", type: "number" },
+          { label: "Zamer belgilandi", name: "Zamer", type: "number" },
+          { label: "Sotuv", name: "Sotuv", type: "number" },
+          { label: "Sotuv miqdori", name: "Sotuv Miqdori", type: "number" },
           { label: "Sana", name: "Sana", type: "date" },
         ] as const).map(({ label, name, type }) => (
           <div className="row" key={name}>
